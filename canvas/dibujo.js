@@ -11,13 +11,7 @@ for (l = 0; l < lineas; l++)
 {
   yi = 10 * l;
   xf = 10 * (l + 1);
-  nxf = 300 - (l * 10);
-  nyi = 300 - (l * 10);
   dibujarLinea('#90CAF9', 0, yi, xf, 300);
-  dibujarLinea('#B2EBF2', 300, yi, nxf, 300);
-  dibujarLinea('#B2EBF2', 0, nyi, xf, 0);
-  dibujarLinea('#FF4081', 300, yi, xf, 0);
-
   console.log("linea " + l);
   l = l + 1; // l++;
 }
