@@ -1,27 +1,20 @@
 var vp = document.getElementById('villaplatzi');
 var papel = vp.getContext("2d");
-
-var fondo = {
-  url:"tile.png",
-  cargaOk: false
-}
-var vaca = {
-  url:"vaca.png",
-  cargaOk: false
-};
-var cerdo = {
-  url:"cerdo.png",
-  cargaOk: false
-}
-var pollo = {
-  url:"pollo.png",
-  cargaOk: false
-}
+document.addEventListener("keyup", dibujarPollo);
+var  xp = 420;
+var yp = 420;
 
 
-var cantidad = aleatorio(0, 10);
-var cantidadC = aleatorio(0, 5);
-var cantidadP = aleatorio(0, 5);
+
+var fondo = {url:"tile.png", cargaOk: false}
+var vaca = {url:"vaca.png", cargaOk: false};
+var cerdo = {url:"cerdo.png", cargaOk: false}
+var pollo = {url:"pollo.png", cargaOk: false}
+
+
+var cantidad = aleatorio(0, 4);
+var cantidadC = aleatorio(0, 8);
+var cantidadP = aleatorio(1, 1);
 
 fondo.imagen = new Image();
 fondo.imagen.src = fondo.url;
@@ -58,12 +51,14 @@ function cargarPollos()
 {
   pollo.cargaOk = true;
   dibujar();
+
 }
 
 
 
 function dibujar()
 {
+
   if (fondo.cargaOk)
   {
     papel.drawImage(fondo.imagen, 0, 0);
@@ -85,8 +80,8 @@ function dibujar()
     console.log(cantidadC);
     for (var c=0; c < cantidadC; c++)
     {
-      var x = aleatorio(0,4);
-      var y = aleatorio(0,4);
+      var x = aleatorio(0,7);
+      var y = aleatorio(0,7);
       var x = x * 70;
       var y = y * 70;
       papel.drawImage(cerdo.imagen, x, y);
@@ -94,16 +89,9 @@ function dibujar()
   }
   if (pollo.cargaOk)
   {
-    console.log(cantidadP);
-    for (var p=0; p < cantidadP; p++)
-    {
-      var x = aleatorio(0,7);
-      var y = aleatorio(0,7);
-      var x = x * 40;
-      var y = y * 40;
-      papel.drawImage(pollo.imagen, x, y);
-    }
+    papel.drawImage(pollo.imagen, xp, yp);
   }
+
 }
 
 
@@ -112,4 +100,31 @@ function aleatorio(min, maxi)
   var resultado;
   resultado = Math.floor(Math.random() * (maxi - min + 1)) + min;
   return resultado;
+}
+
+
+
+function dibujarPollo(evento)
+{
+  var teclas = {UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39};
+  var movimiento = 40;
+  switch (evento.keyCode)
+  {
+    case teclas.UP:
+      yp = yp - movimiento;
+      dibujar();
+      break;
+    case teclas.DOWN:
+      yp = yp + movimiento;
+      dibujar();
+      break;
+    case teclas.LEFT:
+      xp = xp - movimiento;
+      dibujar();
+      break;
+    case teclas.RIGHT:
+      xp = xp + movimiento;
+      dibujar();
+      break;
+  }
 }
